@@ -1,0 +1,17 @@
+# 依赖
+node_modules/
+
+# 构建产物
+dist/
+*.tsbuildinfo
+
+# 运行时数据（方案/运行快照落盘目录）
+server/storage/
+
+# 日志与临时文件
+*.log
+tmp/
+.DS_Store
+
+# 测试运行临时存储
+server/tests/.tmp-storage/

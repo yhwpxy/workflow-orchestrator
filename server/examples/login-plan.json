@@ -1,0 +1,33 @@
+{
+  "id": "plan_ab3f9k",
+  "name": "用户登录功能编排",
+  "version": "1.0",
+  "meta": { "maxConcurrency": 3, "continueOnError": false, "description": "登录流程示例（规格 5.2 节）" },
+  "nodes": [
+    { "id": "n1", "type": "start", "x": 80, "y": 260, "props": {} },
+    { "id": "n2", "type": "task", "x": 280, "y": 120, "props": { "name": "校验用户名格式", "duration": 800, "retry": 0, "failRate": 0 } },
+    { "id": "n3", "type": "task", "x": 280, "y": 400, "props": { "name": "校验密码非空", "duration": 800, "retry": 0, "failRate": 0 } },
+    { "id": "n4", "type": "task", "x": 520, "y": 260, "props": { "name": "查询用户信息", "duration": 1000, "retry": 1, "failRate": 0 } },
+    { "id": "n5", "type": "task", "x": 760, "y": 260, "props": { "name": "比对密码哈希", "duration": 1200, "retry": 1, "failRate": 0, "output": "passed" } },
+    { "id": "n6", "type": "condition", "x": 1000, "y": 260, "props": { "name": "认证是否通过", "expression": "passed == true" } },
+    { "id": "n7", "type": "task", "x": 1240, "y": 120, "props": { "name": "记录登录日志", "duration": 600, "retry": 0, "failRate": 0 } },
+    { "id": "n8", "type": "task", "x": 1240, "y": 400, "props": { "name": "返回错误提示", "duration": 400, "retry": 0, "failRate": 0 } },
+    { "id": "n9", "type": "task", "x": 1480, "y": 120, "props": { "name": "生成会话令牌", "duration": 500, "retry": 0, "failRate": 0 } },
+    { "id": "n10", "type": "end", "x": 1720, "y": 260, "props": {} }
+  ],
+  "edges": [
+    { "id": "e1", "source": "n1", "target": "n2" },
+    { "id": "e2", "source": "n1", "target": "n3" },
+    { "id": "e3", "source": "n2", "target": "n4" },
+    { "id": "e4", "source": "n3", "target": "n4" },
+    { "id": "e5", "source": "n4", "target": "n5" },
+    { "id": "e6", "source": "n5", "target": "n6" },
+    { "id": "e7", "source": "n6", "target": "n7", "label": "true" },
+    { "id": "e8", "source": "n6", "target": "n8", "label": "false" },
+    { "id": "e9", "source": "n7", "target": "n9" },
+    { "id": "e10", "source": "n9", "target": "n10" },
+    { "id": "e11", "source": "n8", "target": "n10" }
+  ],
+  "createdAt": "2026-11-10T10:00:00+08:00",
+  "updatedAt": "2026-11-10T10:30:00+08:00"
+}
